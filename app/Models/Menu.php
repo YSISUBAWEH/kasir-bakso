@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Kategori;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Menu extends Model
@@ -20,7 +19,8 @@ class Menu extends Model
         'foto',
     ];
 
-    public function kate(): BelongsTo{
+    public function kate(): BelongsTo
+    {
         return $this->belongsTo(Kategori::class);
     }
 }

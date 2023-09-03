@@ -124,7 +124,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/manager/kategori_menu" class="nav-link">
+                <a href="/manager/kategori" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
@@ -171,7 +171,7 @@
       <div class="card">
               <div class="card-header justify-content-between">
                 <h3 class="card-title">Data Menu</h3>
-                <a type="button" href="/manager/menu/create" class="btn btn-primary float-right">
+                <a type="button" href="/manager/kategori_menu/create" class="btn btn-primary float-right">
                       Tambah
                     </a>
               </div>
@@ -181,9 +181,7 @@
                   <thead>
                   <tr>
                     <th>No</th>
-                    <th>Gambar</th>
                     <th>Nama</th>
-                    <th>Harga</th>
                     <th class="col-sm-4"></th>
                   </tr>
                   </thead>
@@ -191,14 +189,12 @@
                     @foreach($data as $no=>$isi)
                   <tr>
                     <td>{{$no+1}}</td>
-                    <td><div class="text-center"><img width="75px" class="rounded" src="{{ url('images/menu_img/'.$isi->foto) }}"></div></td>
                     <td>{{$isi->nama}}</td>
-                    <td>{{ $isi->harga }}</td>
                     <td><div class="btn-group">
-                    <a href="/manager/menu/edit/{{$isi->id}}" class="btn btn-primary">
+                    <a href="/manager/kategori_menu/edit/{{$isi->id}}" class="btn btn-primary">
                       <i class="fa fa-pencil"></i>
                     </a>
-                    <a href="/manager/menu/delete/{{$isi->id}}" class="btn btn-danger del" data-id="{{$isi->id}}">
+                    <a href="/manager/kategori_menu/delete/{{$isi->id}}" class="btn btn-danger del" data-id="{{$isi->id}}">
                       <i class="fa-solid fa-trash"></i>
                     </a>
                    </div></td>

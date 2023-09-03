@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('template/plugins/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- DataTables -->
   <link rel="stylesheet" href="{{asset('template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -101,41 +100,11 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/manager" class="nav-link">
+            <a href="../widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Data Menu
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/manager/menu" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Menu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/manager/kategori_menu" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kategori</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="/Manager" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                user
+                Widgets
+                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
@@ -167,52 +136,37 @@
 
     <!-- Main content -->
     <section class="content">
-
-      <div class="card">
-              <div class="card-header justify-content-between">
-                <h3 class="card-title">Data Menu</h3>
-                <a type="button" href="/manager/menu/create" class="btn btn-primary float-right">
-                      Tambah
-                    </a>
+      <div class="col-sm-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Mengedit Kategori Menu</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Gambar</th>
-                    <th>Nama</th>
-                    <th>Harga</th>
-                    <th class="col-sm-4"></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($data as $no=>$isi)
-                  <tr>
-                    <td>{{$no+1}}</td>
-                    <td><div class="text-center"><img width="75px" class="rounded" src="{{ url('images/menu_img/'.$isi->foto) }}"></div></td>
-                    <td>{{$isi->nama}}</td>
-                    <td>{{ $isi->harga }}</td>
-                    <td><div class="btn-group">
-                    <a href="/manager/menu/edit/{{$isi->id}}" class="btn btn-primary">
-                      <i class="fa fa-pencil"></i>
-                    </a>
-                    <a href="/manager/menu/delete/{{$isi->id}}" class="btn btn-danger del" data-id="{{$isi->id}}">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
-                   </div></td>
-                  </tr>
-                  @endforeach
-                  </tbody>
-                  <tfoot>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
+              <!-- form start -->
+              <form action="/manager/kategori_menu/e/{{$data->id}}" method="POST" enctype="multipart/form-data">
+                 @csrf
+                 @method('PUT')
+                <div class="card-body">
+                    <div class="col-sm-8">
+                      <label for="exampleInputNama">Nama</label>
+                      <input type="text" class="form-control" name="name" value="{{old('name',$data->nama)}}" id="exampleInputNama" placeholder="Enter Nama">
+                      @error('name')
+                      <div class="alert alert-danger col-sm-12 mt-2">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                    </div>
+                  </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
             </div>
             <!-- /.card -->
-    </section>
+          </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -234,21 +188,8 @@
 
 <!-- jQuery -->
 <script src="{{asset('template/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- DataTables  & Plugins -->
-<script src="{{asset('template/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{asset('template/plugins/jszip/jszip.min.js')}}"></script>
-<script src="{{asset('template/plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('template/plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('template/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<!-- bs-custom-file-input -->
+<script src="{{asset('template/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
@@ -257,21 +198,9 @@
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
 
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
+$(function () {
+  bsCustomFileInput.init();
+});
 </script>
 </body>
 </html>

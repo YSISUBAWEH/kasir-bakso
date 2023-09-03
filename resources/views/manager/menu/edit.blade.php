@@ -140,13 +140,13 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Membuat Menu</h3>
+                <h3 class="card-title">Mengedit Menu</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/manager/menu/edit/{{$data->id}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+              <form action="/manager/menu/e/{{$data->id}}" method="POST" enctype="multipart/form-data">
+                 @csrf
+                 @method('PUT')
                 <div class="card-body">
                   <div class="form-group row">
                     <div class="col-sm-4">
@@ -165,7 +165,7 @@
                     </div>
                     <div class="col-sm-8">
                       <label for="exampleInputNama">Nama</label>
-                      <input type="text" class="form-control" name="name" value="{{old('name',$data->name)}}" id="exampleInputNama" placeholder="Enter Nama">
+                      <input type="text" class="form-control" name="name" value="{{old('name',$data->nama)}}" id="exampleInputNama" placeholder="Enter Nama">
                       @error('name')
                       <div class="alert alert-danger col-sm-12 mt-2">
                         {{ $message }}
@@ -185,21 +185,17 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Kategori</label>
-                        <div class="dropdown">
-                                  <button class="btn dropdown-toggle col-md-12" style="background: white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select a Kategori
-                                    </button> 
-                                    <ul class="dropdown-menu col-md-12"><li>                         
-                                <div class="form-check">
-                                    @foreach($kate as $tag)
-                                    <input class="form-check-input ml-3" type="checkbox" name="kategori_menu[]" value="{{$tag->id}}" id="tags{{$tag->id}}" @if(in_array($tag->id,$data->kate->pluck('id')->toArray())) checked @endif>
-                                    <label class="form-check-label ml-5" for="kategori_menu{{$tag->id}}">
-                                        {{$tag->name}}
-                                    </label><br>
-                                    @endforeach
-                                </div></li>
-                                </ul>
-                                </div>
+                        <select class="form-control custom-select form-control-border" name="kategori_menu">
+                          <option selected="Select"></option>
+                          @if($data->kategori_menu_id == 1)
+                          <option value="1" selected>Makanan</option>
+                          <option value="2" >Minuman</option>
+                          @endif
+                          @if($data->kategori_menu_id == 2)
+                          <option value="1" >Makanan</option>
+                          <option value="2" selected>Minuman</option>
+                          @endif
+                        </select>
                         @error('kategori_menu')
                       <div class="alert alert-danger col-sm-12 mt-2">
                         {{ $message }}
